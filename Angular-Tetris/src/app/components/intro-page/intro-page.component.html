@@ -1,35 +1,6 @@
 <div class="container row flex-center" style="align-items: center">
   <h1>Welcome to Tetris!</h1>
   <div class="row">
-    <form #introForm="ngForm" (ngSubmit)="onSubmit(introForm.form)">
-      <input
-        (input)="cleanWarning()"
-        style="width: 500px"
-        type="text"
-        placeholder="user name"
-        ngModel
-        required
-        name="username"
-      />
-      <input
-        (input)="cleanWarning()"
-        style="width: 500px"
-        type="email"
-        placeholder="e-mail"
-        ngModel
-        required
-        name="mail"
-      />
-      <button type="submit" style="width: 500px">Start</button>
-      <div
-        class="alert alert-warning"
-        style="width: 500px"
-        *ngIf="isPersonInfoInvalid"
-      >
-        {{
-          "  Nazwa użytkownika musi zawierać minimalnie 3 znaki. Email musi zawierać @."
-        }}
-      </div>
-    </form>
+    <app-user-form (submitForm)="onSubmitForm($event)"></app-user-form>
   </div>
 </div>

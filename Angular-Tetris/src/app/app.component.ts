@@ -1,20 +1,20 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  title = 'tetris';
+  title = "tetris";
 
   public isUserValid: boolean = false;
 
-  public username: string = '';
+  public username: string = "";
 
   constructor() {}
 
-  public onTakeValidUSerToGamePage(username: string) {
+  public onTakeValidUSerToGamePage(username: any) {
     this.isUserValid = true;
     this.username = username;
   }

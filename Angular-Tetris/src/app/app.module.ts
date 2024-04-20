@@ -1,13 +1,15 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 
-import { AppComponent } from './app.component';
-import { IntroPageComponent } from './components/intro-page/intro-page.component';
-import { GamePageComponent } from './components/game-page/game-page.component';
-import { FormsModule } from '@angular/forms';
-import { TetrisCoreModule } from 'ngx-tetris';
-import { SortPipe } from './shared/model/pipes/sort.pipe';
-import { FilterPipe } from './shared/model/pipes/filter.pipe';
+import { AppComponent } from "./app.component";
+import { IntroPageComponent } from "./components/intro-page/intro-page.component";
+import { GamePageComponent } from "./components/game-page/game-page.component";
+import { FormsModule } from "@angular/forms";
+import { TetrisCoreModule } from "ngx-tetris";
+import { SortPipe } from "./shared/model/pipes/sort.pipe";
+import { FilterPipe } from "./shared/model/pipes/filter.pipe";
+import { RouterModule } from "@angular/router";
+import { UserFormComponent } from "./components/intro-page/user-from/user-form.component";
 
 @NgModule({
   declarations: [
@@ -16,8 +18,18 @@ import { FilterPipe } from './shared/model/pipes/filter.pipe';
     GamePageComponent,
     SortPipe,
     FilterPipe,
+    UserFormComponent,
   ],
-  imports: [BrowserModule, FormsModule, TetrisCoreModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    TetrisCoreModule,
+    RouterModule.forRoot([
+      { path: "intro", component: IntroPageComponent },
+      { path: "game", component: GamePageComponent },
+      { path: "**", redirectTo: "intro" },
+    ]),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -6,29 +6,30 @@ import {
   EventEmitter,
   ViewChild,
   ElementRef,
-} from '@angular/core';
-import * as moment from 'moment';
+} from "@angular/core";
+import { Router } from "@angular/router";
+import * as moment from "moment";
 
-import GameHistory from 'src/app/shared/model/gameHistory';
+import GameHistory from "src/app/shared/model/gameHistory";
 
 enum GameStates {
-  Start = 'Started',
-  Stop = 'Stopped',
-  Reset = 'Reset',
-  Clear = 'Cleared',
-  AllActions = 'All',
-  Ready = 'Ready',
+  Start = "Started",
+  Stop = "Stopped",
+  Reset = "Reset",
+  Clear = "Cleared",
+  AllActions = "All",
+  Ready = "Ready",
 }
 
 @Component({
-  selector: 'app-game-page',
-  templateUrl: './game-page.component.html',
-  styleUrls: ['./game-page.component.scss'],
+  selector: "app-game-page",
+  templateUrl: "./game-page.component.html",
+  styleUrls: ["./game-page.component.scss"],
 })
 export class GamePageComponent implements OnInit {
-  @ViewChild('actionsBtnGroup') actionsBtnGroup: ElementRef | undefined;
+  @ViewChild("actionsBtnGroup") actionsBtnGroup: ElementRef | undefined;
 
-  @Input() public username: string = '';
+  @Input() public username: string = "";
 
   @Output() public return = new EventEmitter();
 
@@ -46,7 +47,7 @@ export class GamePageComponent implements OnInit {
 
   public selectedAction = GameStates.AllActions;
 
-  constructor() {}
+  constructor(private _router: Router) {}
 
   ngOnInit(): void {
     setInterval(() => {
@@ -57,7 +58,7 @@ export class GamePageComponent implements OnInit {
   }
 
   public onReturnToHomePage() {
-    this.return.emit();
+    this._router.navigate(["./login"]);
   }
 
   public onGameStateChange(gameState: GameStates) {

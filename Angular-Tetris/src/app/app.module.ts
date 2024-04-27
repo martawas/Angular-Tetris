@@ -10,6 +10,10 @@ import { SortPipe } from "./shared/model/pipes/sort.pipe";
 import { FilterPipe } from "./shared/model/pipes/filter.pipe";
 import { RouterModule } from "@angular/router";
 import { UserFormComponent } from "./components/intro-page/user-from/user-form.component";
+import { TetrisApiService } from "./api/tetris-api.service";
+import { HighScoresComponent } from "./components/high-scores/high-scores.component";
+import { HighScoresTableComponent } from "./components/high-scores/high-scores-table/high-scores-table.component";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -19,18 +23,22 @@ import { UserFormComponent } from "./components/intro-page/user-from/user-form.c
     SortPipe,
     FilterPipe,
     UserFormComponent,
+    HighScoresComponent,
+    HighScoresTableComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     FormsModule,
     TetrisCoreModule,
     RouterModule.forRoot([
       { path: "intro", component: IntroPageComponent },
       { path: "game", component: GamePageComponent },
+      { path: "scores", component: HighScoresComponent },
       { path: "**", redirectTo: "intro" },
     ]),
   ],
-  providers: [],
+  providers: [TetrisApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

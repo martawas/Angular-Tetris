@@ -90,4 +90,8 @@ export class GamePageComponent implements OnInit {
   public onLineCleared() {
     ++this.points;
   }
+
+  public showScores() {
+    this._router.navigate(["./scores"]);
+  }
 }

@@ -1,7 +1,7 @@
 <form #introForm="ngForm" (ngSubmit)="onSubmit(introForm.form.value)">
   <input
     (input)="cleanWarning()"
-    style="width: 100%"
+    style="width: 200px"
     class="form-control"
     type="text"
     placeholder="user name"
@@ -12,7 +12,7 @@
   />
   <input
     (input)="cleanWarning()"
-    style="width: 100%"
+    style="width: 200px"
     type="email"
     class="form-control"
     placeholder="e-mail"
@@ -21,7 +21,7 @@
     name="mail"
     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
   />
-  <button type="submit" style="width: 100%">START GAME</button>
+  <button type="submit" style="width: 200px">START GAME</button>
   <div
     class="alert alert-warning"
     style="width: 100%"

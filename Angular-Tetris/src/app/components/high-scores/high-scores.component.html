@@ -1,0 +1,13 @@
+<div class="modal">
+  <label class="modal-bg" for="modal-1"></label>
+  <div class="modal-body">
+    <h4 class="modal-title">High scores</h4>
+
+    <p class="modal-text">
+      <app-high-scores-table [highScores]="highScores"></app-high-scores-table>
+    </p>
+    <button class="btn-success" (click)="back()">
+      <label for="modal-1">Back</label>
+    </button>
+  </div>
+</div>

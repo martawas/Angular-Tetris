@@ -21,6 +21,7 @@
         <tetris-core
           #game
           (lineCleared)="onLineCleared(); pushLineClearedToHistory()"
+          [class.black-and-white]="color === gameModes.High"
         ></tetris-core>
       </div>
       <div>

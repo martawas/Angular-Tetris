@@ -1,7 +1,14 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { UserInfoService } from "src/app/services/user-info.service";
+import { GameModes } from "src/app/shared/model/enums/game-modes";
+import UserInformations from "src/app/shared/model/interfaces/user-info";
+import {
+  Validators,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+} from "@angular/forms";
 
 interface UserInfo {
   name: string;
@@ -13,12 +20,25 @@ interface UserInfo {
   styleUrls: ["./user-form.component.scss"],
 })
 export class UserFormComponent implements OnInit {
-  @Output() public submitForm = new EventEmitter<UserInfo>();
-  public username: string = "";
+  @Output() public submitForm = new EventEmitter<{
+    userinfo: UserInformations;
+    colors: GameModes;
+  }>();
 
+  @Output() setUserInfo = new EventEmitter<UserInformations>();
+  public gameModes = GameModes;
+  public username: string = "";
   public mail: string = "";
+  public color: GameModes = GameModes.Normal;
 
   public isPersonInfoInvalid: boolean = false;
+
+  public introForm = new FormGroup({
+    name: new FormControl(this.username, [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+  });
 
   constructor(private _userService: UserInfoService, private _router: Router) {}
 
@@ -28,15 +48,17 @@ export class UserFormComponent implements OnInit {
     this.isPersonInfoInvalid = false;
   }
 
-  public onSubmit(form: any) {
-    console.log(form.mail);
-    this.submitForm.emit(form.username);
-    this.mail = form.mail;
-    if (this.username.length >= 3 && this.mail.includes("@")) {
-      this._userService.setUserName(this.username);
-      this._router.navigate(["/game"]);
-    } else {
-      this.isPersonInfoInvalid = true;
-    }
+  public onSetContrast(contrast: GameModes) {
+    this.color = contrast;
+  }
+
+  public onSubmit(mode: UserInformations) {
+    this.submitForm.emit({
+      userinfo: {
+        username: mode.username,
+        mail: mode.mail,
+      },
+      colors: this.color,
+    });
   }
 }

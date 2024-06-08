@@ -8,7 +8,7 @@
     ngModel
     required
     name="username"
-    minlength="3"
+    minlength="5"
   />
   <input
     (input)="cleanWarning()"
@@ -21,7 +21,22 @@
     name="mail"
     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
   />
-  <button type="submit" style="width: 200px">START GAME</button>
+  <div class="row flex-center">
+    <button
+      type="submit"
+      [disabled]="introForm.invalid"
+      (click)="onSetContrast(gameModes.High)"
+    >
+      Start game on High Contrast
+    </button>
+    <button
+      type="submit"
+      (click)="onSetContrast(gameModes.Normal)"
+      [disabled]="introForm.invalid"
+    >
+      Start game on Normal Mode
+    </button>
+  </div>
   <div
     class="alert alert-warning"
     style="width: 100%"

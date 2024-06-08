@@ -7,8 +7,9 @@ import {
   ViewChild,
   ElementRef,
 } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import * as moment from "moment";
+import { GameModes } from "src/app/shared/model/enums/game-modes";
 
 import GameHistory from "src/app/shared/model/gameHistory";
 
@@ -47,9 +48,15 @@ export class GamePageComponent implements OnInit {
 
   public selectedAction = GameStates.AllActions;
 
-  constructor(private _router: Router) {}
+  public gameModes = GameModes;
+  public color: GameModes;
+
+  constructor(private _router: Router, private _route: ActivatedRoute) {
+    this.color = this._route.snapshot.params["colors"];
+  }
 
   ngOnInit(): void {
+    console.log(this.color);
     setInterval(() => {
       if (this.gameStatus === GameStates.Start) {
         ++this.seconds;

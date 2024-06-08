@@ -33,7 +33,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
     TetrisCoreModule,
     RouterModule.forRoot([
       { path: "intro", component: IntroPageComponent },
-      { path: "game", component: GamePageComponent },
+      { path: "game/:colors", component: GamePageComponent },
       { path: "scores", component: HighScoresComponent },
       { path: "**", redirectTo: "intro" },
     ]),

@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-
+import { ReactiveFormsModule } from "@angular/forms";
 import { AppComponent } from "./app.component";
 import { IntroPageComponent } from "./components/intro-page/intro-page.component";
 import { GamePageComponent } from "./components/game-page/game-page.component";
@@ -30,6 +30,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
     HttpClientModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     TetrisCoreModule,
     RouterModule.forRoot([
       { path: "intro", component: IntroPageComponent },

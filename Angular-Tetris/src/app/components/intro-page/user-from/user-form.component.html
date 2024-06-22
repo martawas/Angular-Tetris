@@ -1,48 +1,68 @@
-<form #introForm="ngForm" (ngSubmit)="onSubmit(introForm.form.value)">
+<form [formGroup]="introForm" (ngSubmit)="onSubmit(gameModes.High)">
   <input
-    (input)="cleanWarning()"
-    style="width: 200px"
+    style="width: 100%"
     class="form-control"
     type="text"
     placeholder="user name"
-    ngModel
-    required
-    name="username"
-    minlength="5"
+    formControlName="name"
   />
   <input
-    (input)="cleanWarning()"
-    style="width: 200px"
+    style="width: 100%"
+    type="text"
+    class="form-control"
+    placeholder="token"
+    formControlName="token"
+    (blur)="onInputBlur()"
+  />
+  <input
+    style="width: 100%"
     type="email"
     class="form-control"
-    placeholder="e-mail"
-    ngModel
-    required
-    name="mail"
-    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+    placeholder="email"
+    formControlName="mail"
   />
   <div class="row flex-center">
     <button
-      type="submit"
+      type="button"
       [disabled]="introForm.invalid"
-      (click)="onSetContrast(gameModes.High)"
+      (click)="onSubmit(gameModes.High)"
     >
       Start game on High Contrast
     </button>
     <button
-      type="submit"
-      (click)="onSetContrast(gameModes.Normal)"
+      type="button"
       [disabled]="introForm.invalid"
+      (click)="onSubmit(gameModes.Normal)"
     >
       Start game on Normal Mode
     </button>
   </div>
+
   <div
     class="alert alert-warning"
     style="width: 100%"
-    *ngIf="!introForm.value.valid || !introForm.value.pristine"
+    *ngIf="
+      introForm.controls['name'].invalid && introForm.controls['name'].dirty
+    "
   >
-    Nazwa użytkownika musi zawierać minimalnie 3 znaki. Email musi zawierać
-    &#64;.
+    Nazwa użytkownika musi zawierać minimalnie 5 znaków.
+  </div>
+  <div
+    class="alert alert-warning"
+    style="width: 100%"
+    *ngIf="
+      introForm.controls['token'].invalid && introForm.controls['token'].dirty
+    "
+  >
+    Wprowadź 5-cyfrowy token.
+  </div>
+  <div
+    class="alert alert-warning"
+    style="width: 100%"
+    *ngIf="
+      introForm.controls['mail'].invalid && introForm.controls['mail'].dirty
+    "
+  >
+    Wprowadź poprawny adres email.
   </div>
 </form>
